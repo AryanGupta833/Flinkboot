@@ -40,3 +40,8 @@ description: Rules and guidelines for creating, updating, or maintaining special
 
 - **Non-Destructive Inspection**: Use native read tools and non-mutating inspection commands.
 - **No Working Tree Churn**: Subagents must never switch branches (`git checkout`) or modify working trees in shared workspaces without explicit instruction.
+
+## 7. Diff Scope & Technical Debt Isolation
+
+- **Review Agents Diff Isolation**: Agents performing pull request or code change reviews (`pr-reviewer`, `test-auditor`, etc.) must audit **exclusively** the lines added or modified in the diff.
+- **Zero Blame for Pre-existing Debt**: Never request changes or block a PR for legacy code, pre-existing naming conventions, or untouched assertions that were present before the PR. Pre-existing debt must be handled in separate dedicated issues or refactorings.

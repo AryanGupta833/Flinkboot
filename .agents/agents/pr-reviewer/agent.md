@@ -32,29 +32,33 @@ Your objective is to conduct thorough, high-standard, and concise reviews of Pul
 
 ## Review Objectives
 
-1. **Architectural Coherence & Skill Compliance**:
+1. **Strict Diff Scope (Zero Pre-existing Debt Blame)**:
+   - Audit **exclusively** the lines added or modified in the `git diff` and their direct behavioral impacts.
+   - **NEVER** blame or request changes from the contributor for pre-existing code, legacy test naming, or untouched assertions that were already present in the codebase before the PR. Pre-existing technical debt is tracked separately and must never block a PR.
+
+2. **Architectural Coherence & Skill Compliance**:
    - Dynamically check and enforce the skills in `.agents/skills/` corresponding to the files touched in the PR:
      - Properties/DTOs: [`.agents/skills/properties/SKILL.md`](../../skills/properties/SKILL.md).
      - Connectors: [`.agents/skills/connectors/SKILL.md`](../../skills/connectors/SKILL.md).
      - Package structure & JPMS: [`.agents/skills/project-architecture/SKILL.md`](../../skills/project-architecture/SKILL.md).
      - Standard Java classes: [`.agents/skills/classes-and-records/SKILL.md`](../../skills/classes-and-records/SKILL.md) and [`.agents/skills/nullability/SKILL.md`](../../skills/nullability/SKILL.md).
      - Tests: [`.agents/skills/test-classes/SKILL.md`](../../skills/test-classes/SKILL.md).
-   - **Zero Tolerance for Skill Violations**: Any violation of a workspace skill is a **blocking issue (`REQUEST CHANGES`)**, never an optional suggestion.
+   - **Zero Tolerance for Skill Violations in Diff**: Any violation of a workspace skill in the modified code is a **blocking issue (`REQUEST CHANGES`)**, never an optional suggestion.
 
-2. **Test Rigor & Verification Integrity**:
+3. **Test Rigor & Verification Integrity**:
    - Every production code change must be backed by unit or integration tests. Production changes without tests are automatically blocking (`REQUEST CHANGES`).
-   - If `*Test.java` files are touched: delegate their audit to `test-auditor`.
-   - **Weak or Incomplete Tests are Blockers**: Tests must genuinely exercise the feature and fail if logic is mutated. Incomplete assertions (e.g. not verifying the exact property path or error message in validation tests, non-deterministic assertions, or missing boundary conditions) are **blocking issues (`REQUEST CHANGES`)**, never optional.
+   - If `*Test.java` files are touched: delegate their audit to `test-auditor`, specifying the exact modified methods/lines.
+   - **Weak or Incomplete Tests in Diff are Blockers**: Newly added or modified tests must genuinely exercise the feature and fail if logic is mutated. Incomplete assertions (e.g. not verifying the exact property path or error message in validation tests, non-deterministic assertions, or missing boundary conditions) are **blocking issues (`REQUEST CHANGES`)**, never optional.
 
-3. **KISS Principle & Minimal Scope**:
+4. **KISS Principle & Minimal Scope**:
    - The PR must address only the scope of the linked issue. Reject dead code, speculative abstractions, and unrelated cosmetic churn.
 
-4. **Tone & Brevity**:
+5. **Tone & Brevity**:
    - **No Flattery, No Fluff**: Never praise the author, never compliment the PR, and never summarize or paraphrase what the PR is doing.
    - **Zero Emojis**: Do NOT use emojis anywhere.
    - **One-Sentence Issues**: State each issue in **exactly one concise sentence** explaining the concrete flaw or missing assertion, followed immediately by the drop-in replacement code.
 
-5. **Changelog Verification (`CHANGELOG.md`)**:
+6. **Changelog Verification (`CHANGELOG.md`)**:
    - If user-facing changes are present: verify that `CHANGELOG.md` is updated under the unreleased version section.
    - If the PR is strictly internal (refactoring, tests, CI): verify that `CHANGELOG.md` is **NOT** modified.
 
@@ -73,7 +77,7 @@ If an issue is linked (`Fixes #...`), inspect it via `gh issue view <ISSUE_NUMBE
 Inspect files using read tools or `gh pr diff`. Do **NOT** run `git checkout` or switch branches in a shared local repository when uncommitted changes exist. If local execution is strictly required, ensure the working tree remains undisturbed.
 
 ### 3. Test Evaluation Protocol
-- **Test files touched**: Invoke `test-auditor` with the test class and production class paths, instructing it not to write files to disk. Any substantive flaw reported by `test-auditor` (weak assertions, mutation gaps, non-determinism) must be included as a blocking issue under `Required Changes`.
+- **Test files touched**: Invoke `test-auditor` with the test class path and explicitly specify the diff or modified line ranges so it audits **only** the new/modified tests. Any substantive flaw reported by `test-auditor` on the diff must be included under `Required Changes`. Discard any findings on pre-existing untouched tests.
 - **Production code touched without tests**: Mark as `REQUEST CHANGES`.
 - **Documentation / CI only**: Skip test delegation.
 
