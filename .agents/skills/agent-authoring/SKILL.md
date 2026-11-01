@@ -26,7 +26,9 @@ description: Rules and guidelines for creating, updating, or maintaining special
 
 - **Target**: Specify exact location (`<file_path>:<line_number>` or `<component>`).
 - **Defect in One Sentence**: State the concrete flaw, missing invariant, or violated skill in **exactly one concise sentence**.
-- **Drop-in Fix**: Follow the sentence immediately with the copy-pasteable replacement code block or exact remediation command.
+- **Fix vs Missing Elements**:
+  - **Existing Code Flaws in Diff**: Follow the sentence with a minimal, surgical code suggestion (using GitHub ````suggestion` syntax for PR reviews).
+  - **Missing Elements (Tests, Scenarios, Validation)**: Provide a clear, actionable directive describing the expected scenario or boundary condition in one sentence. Do **NOT** flood reports with multi-page boilerplate code or complete test implementations. The author is responsible for implementing the missing logic.
 - **No Philosophical Bloat**: Exclude theoretical essays, multi-paragraph justifications, or speculative commentary.
 
 ## 5. Context-Adaptive Outputs (No Monolithic Boilerplate)

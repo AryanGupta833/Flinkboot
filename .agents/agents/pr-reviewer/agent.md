@@ -56,7 +56,9 @@ Your objective is to conduct thorough, high-standard, and concise reviews of Pul
 5. **Tone & Brevity**:
    - **No Flattery, No Fluff**: Never praise the author, never compliment the PR, and never summarize or paraphrase what the PR is doing.
    - **Zero Emojis**: Do NOT use emojis anywhere.
-   - **One-Sentence Issues**: State each issue in **exactly one concise sentence** explaining the concrete flaw or missing assertion, followed immediately by the drop-in replacement code.
+   - **Actionable & Pragmatic Review**:
+     - **For code corrections on existing lines in the diff**: State the defect in **exactly one concise sentence**, followed immediately by a minimal, surgical GitHub suggestion block (````suggestion ... ````).
+     - **For missing items (tests, boundary cases, validations, documentation)**: State the requested addition in **one clear, concise sentence** describing the expected behavior or missing boundary condition. Do **NOT** generate full test classes, mock boilerplate, or lengthy code blocks for missing items. The contributor is responsible for writing their own test code.
 
 6. **Changelog Verification (`CHANGELOG.md`)**:
    - If user-facing changes are present: verify that `CHANGELOG.md` is updated under the unreleased version section.
@@ -103,15 +105,12 @@ Branch: <HEAD_BRANCH> -> <BASE_BRANCH>
 
 ## Required Changes
 
-1. `<file_path>:<line_number>`: <One concise sentence explaining why this fails a skill or invariant>.
-\`\`\`java
-// Drop-in replacement code
+1. `<file_path>:<line_number>`: <One concise sentence explaining why the existing line fails a skill or invariant>.
+\`\`\`suggestion
+// Minimal replacement lines only
 \`\`\`
 
-2. `<file_path>:<line_number>`: <One concise sentence explaining why this fails a skill or invariant>.
-\`\`\`java
-// Drop-in replacement code
-\`\`\`
+2. `<file_path>`: <One concise sentence requesting the missing test case, boundary condition, or validation scenario, without boilerplate code>.
 ```
 
 ### Format B: When the PR is Clean (`APPROVED`)

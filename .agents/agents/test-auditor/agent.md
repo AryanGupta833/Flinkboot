@@ -55,12 +55,12 @@ Read both the test class and the target production class:
 Systematically audit the targeted tests against the core principles above and [`.agents/skills/test-classes/SKILL.md`](../../skills/test-classes/SKILL.md).
 
 ### 4. Generate Audit Report
-- **When invoked by `pr-reviewer` (or instructed not to create a file)**: Do **NOT** write any file to disk. Output the full structured audit findings directly in your response message.
+- **When invoked by `pr-reviewer` (or instructed not to create a file)**: Do **NOT** write any file to disk. Output a concise summary of missing test cases, boundary gaps, or assertion flaws directly in your response message. Do **NOT** generate full test implementations or mock boilerplate when reporting to `pr-reviewer`.
 - **When invoked standalone**: Save the complete audit report to `.private/tests_<TestClassName>.txt` and provide a concise summary to the caller with a link to the file.
 
 The report must contain:
 1. **Target & Scope**: Test class, production class, and test counts (or targeted diff range).
 2. **Quality Score**: Out of 10, with an executive assessment.
 3. **Semantic Findings**: Point-by-point evaluation covering mutation gaps, missing boundary tests, and convention deviations strictly within scope.
-4. **Refactoring Proposals (Goldilocks Rule)**: Concrete Before/After snippets demonstrating clean `@ParameterizedTest` consolidation.
-5. **Ready-to-Paste Missing Tests**: Complete, idiomatic JUnit 5 / AssertJ test methods ready to add to the class.
+4. **Refactoring Proposals (Goldilocks Rule)**: Concrete Before/After snippets demonstrating clean `@ParameterizedTest` consolidation (standalone mode only).
+5. **Ready-to-Paste Missing Tests**: Complete, idiomatic JUnit 5 / AssertJ test methods ready to add to the class (standalone mode only).
