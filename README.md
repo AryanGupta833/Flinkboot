@@ -13,13 +13,12 @@
 </p>
 
 [![Java](https://img.shields.io/badge/Java_11%2B-%23ED8B00.svg?logo=openjdk&logoColor=white)](https://docs.oracle.com/en/java/javase/11/docs/api/index.html)
-[![Flink](https://img.shields.io/badge/Flink_1.20-%23E6526F.svg?logo=apacheflink&logoColor=white)](https://flink.apache.org/)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.sekelenao/flinkboot-core?label=Maven%20central&logo=apachemaven&logoColor=white&color=C71A36&labelColor=C71A36)](https://central.sonatype.com/artifact/io.github.sekelenao/flinkboot-core)
+[![Flink](https://img.shields.io/badge/Flink_1.20-%236f42c1.svg?logo=apacheflink&logoColor=white)](https://flink.apache.org/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.sekelenao/flinkboot-core?label=Maven%20central&logo=apachemaven&logoColor=white&color=007ec6&labelColor=007ec6)](https://central.sonatype.com/artifact/io.github.sekelenao/flinkboot-core)
 ![Tests](https://raw.githubusercontent.com/Sekelenao/Flinkboot/badges/Tests.svg)
 ![Coverage](https://raw.githubusercontent.com/Sekelenao/Flinkboot/badges/Coverage.svg)
 ![Branches](https://raw.githubusercontent.com/Sekelenao/Flinkboot/badges/Branches.svg)
-
----
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Sekelenao_Flinkboot&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Sekelenao_Flinkboot)
 
 Flinkboot eliminates operational boilerplate and prevents runtime failures before stream pipelines reach TaskManagers:
 
